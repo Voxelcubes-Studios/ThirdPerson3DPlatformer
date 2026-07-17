@@ -1,0 +1,78 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "92abff20-e126-4103-9ac7-4b23bb118ffc",
+  "files": [],
+  "subMetas": {
+    "97371": {
+      "importer": "gltf-scene",
+      "uuid": "92abff20-e126-4103-9ac7-4b23bb118ffc@97371",
+      "displayName": "",
+      "id": "97371",
+      "name": "grass1.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a9bed": {
+      "importer": "gltf-mesh",
+      "uuid": "92abff20-e126-4103-9ac7-4b23bb118ffc@a9bed",
+      "displayName": "",
+      "id": "a9bed",
+      "name": "grass1.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 420
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "92abff20-e126-4103-9ac7-4b23bb118ffc@a9bed"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "92abff20-e126-4103-9ac7-4b23bb118ffc@97371"
+      ]
+    }
+  }
+}

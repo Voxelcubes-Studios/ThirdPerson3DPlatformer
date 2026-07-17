@@ -1,0 +1,53 @@
+import { _decorator, EventTarget } from 'cc';
+import { GameEventEnum } from '../Enums/GameEventEnum';
+
+const { ccclass } = _decorator;
+
+@ccclass('GameDataService')
+export class GameDataService {
+	private static _instance: GameDataService = null;
+
+	public counter = 0;
+	public isGamepadActive = true;
+
+	/**
+	 * Use for hiding or showing the virtual joystick on screen.
+	 * This is useful for mobile devices where the virtual joystick
+	 * is used for player movement.
+	 */
+	public showJoystickOnScreen = true;
+	public updateCounterEvent = new EventTarget();
+
+	private constructor() {
+		if (GameDataService._instance) {
+			throw new Error(
+				'Error: Instantiation failed: Use GameDataService.getInstance() instead of new keyword.'
+			);
+		}
+		GameDataService._instance = this;
+	}
+
+	/**
+	 * Call single instance of this class in which all
+	 * variables and function can be accessed.
+	 * @returns
+	 */
+	public static getInstance(): GameDataService {
+		if (this._instance === null) {
+			this._instance = new GameDataService();
+		}
+		return this._instance;
+	}
+
+	public updateCounter(callback?: () => void): void {
+		this.counter += 1;
+
+		this.updateCounterEvent.emit(GameEventEnum.UPDATE_COUNTER_EVENT, {
+			counter: this.counter,
+		});
+
+		if (callback) {
+			callback();
+		}
+	}
+}
