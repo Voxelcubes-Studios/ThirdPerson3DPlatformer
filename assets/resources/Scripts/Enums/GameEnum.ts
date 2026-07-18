@@ -4,7 +4,6 @@ const { ccclass } = _decorator;
 @ccclass('GameEnum')
 export class GameEnum {
 	// Node Names
-	public static MAIN_CAMERA = 'MainCamera';
 	public static SCENE_SCRIPT = 'SceneScript';
 	public static DEAD_ZONE = 'DeadZone';
 	public static PLAYER = 'Player';

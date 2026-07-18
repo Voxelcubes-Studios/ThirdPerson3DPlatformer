@@ -24,9 +24,7 @@ export class PlayerController extends Component {
 	@property({ type: SkeletalAnimation })
 	public skeletalAnim: SkeletalAnimation | null = null;
 
-	@property({ tooltip: 'Gravity pull force when player is not grounded' })
-	public gravityForce: number = -50.0;
-
+	public gravityForce: number = -400;
 	private machine: StateMachineCore = new StateMachineCore();
 	private joystickController: VirtualJoystickController = null;
 	private gamepadController: GamepadController = null;
@@ -37,8 +35,9 @@ export class PlayerController extends Component {
 	public runSpeed: number = 5;
 	private isGrounded = false;
 	private raycastMask = 0xffffffff;
-	private raycastMaxDistance = 0.2; // 1; // 10000000;
+	private raycastMaxDistance = 0.2;
 	private raycastQueryTrigger = true;
+	private isGravityIncreased: boolean = false;
 
 	private playIdleAnimation(): void {
 		if (this.skeletalAnim) {
@@ -52,6 +51,12 @@ export class PlayerController extends Component {
 		}
 	}
 
+	/**
+	 * Sets up the animation states for the player character.
+	 * This method initializes the state machine with the idle and run states,
+	 * allowing for smooth transitions between animations based on player input
+	 * and movement.
+	 */
 	private addAnimationStates(): void {
 		if (this.skeletalAnim) {
 			// Idle State
@@ -146,7 +151,6 @@ export class PlayerController extends Component {
 						 * don't want to use in isGrounded detection logic.
 						 */
 						if (collider.node.name === GameEnum.DEAD_ZONE) {
-							console.log('Deadzone');
 							this.isGrounded = false;
 							return;
 						}
@@ -154,32 +158,35 @@ export class PlayerController extends Component {
 				}
 
 				this.isGrounded = true;
-				console.log('Player is grounded:', this.isGrounded);
 			}
 		} else {
 			this.isGrounded = false;
-			console.log('Player is not grounded:', this.isGrounded);
 		}
 	}
 
 	/**
 	 * If the player is not grounded, apply
 	 * fall acceleration.
-	 * @param dt
 	 */
-	private increaseGravity(dt: number): void {
-		if (!this.isGrounded) {
-			let velocity = new Vec3();
-			this.rigidBody.getLinearVelocity(velocity);
 
-			velocity.y += this.gravityForce * dt; // Increase downward speed
-			this.rigidBody.setLinearVelocity(velocity);
+	private increaseGravity(): void {
+		if (this.isGravityIncreased) return;
+
+		if (!this.isGrounded) {
+			this.isGravityIncreased = true;
+			PhysicsSystem.instance.gravity = new Vec3(0, this.gravityForce, 0);
 		}
+	}
+
+	private resetGravity(): void {
+		this.isGravityIncreased = false;
+		PhysicsSystem.instance.gravity = new Vec3(0, -10, 0);
 	}
 
 	public respawn(): void {
 		const spawnPosNode = find(GameEnum.SPAWN_POSITION_NODE);
 		if (spawnPosNode) {
+			this.resetGravity();
 			this.node.setWorldPosition(spawnPosNode.getWorldPosition());
 		}
 	}
@@ -225,6 +232,6 @@ export class PlayerController extends Component {
 		}
 
 		// Accelerates players gravity.
-		this.increaseGravity(deltaTime);
+		this.increaseGravity();
 	}
 }
