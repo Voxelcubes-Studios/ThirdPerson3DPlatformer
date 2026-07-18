@@ -20,7 +20,7 @@ export class PlayerController extends Component {
 	private velocity: Vec3 = new Vec3();
 	private targetAngle: number = 0;
 	private forward = new Vec3();
-	public runSpeed: number = 4;
+	public runSpeed: number = 5;
 
 	private playIdleAnimation(): void {
 		if (this.skeletalAnim) {
@@ -62,7 +62,10 @@ export class PlayerController extends Component {
 	): void {
 		if (this.rigidBody && controller) {
 			if (isTouching && direction.lengthSqr() > 0) {
-				// 1. Calculate target Y-axis rotation angle
+				/**
+				 * Calculate target Y-axis rotation angle.
+				 * Use negative value to invert the direction if needed.
+				 */
 				this.targetAngle = math.toDegree(Math.atan2(direction.x, -direction.y));
 
 				// 4. Calculate velocity vector in the forward direction

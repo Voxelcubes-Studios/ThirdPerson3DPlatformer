@@ -13,10 +13,10 @@ export class VirtualJoystickController extends Component {
 	@property(Node)
 	joystickKnob: Node | null = null;
 
-	private maxRadius: number = 100; // Maximum distance the handle can move
-	private startPos = new Vec2(); // Starting position of the joystick background
-	public direction = new Vec2(); // Normalized direction vector
-	public isTouching: boolean = false; // Flag to track touch state
+	private maxRadius: number = 100;
+	private startPos = new Vec2();
+	public direction = new Vec2();
+	public isTouching: boolean = false;
 	private isJoystickActive = true;
 	private gameDataService = GameDataService.getInstance();
 
@@ -123,6 +123,7 @@ export class VirtualJoystickController extends Component {
 
 			/**
 			 * Only remove the joystick if set to true in settings
+			 * @see GameDataService.showJoystickOnScreen
 			 */
 			if (this.gameDataService.showJoystickOnScreen) {
 				this.joystickBase.active = false;
@@ -142,9 +143,6 @@ export class VirtualJoystickController extends Component {
 		}
 	}
 
-	/**
-	 * Start when this node is created
-	 */
 	public start(): void {
 		input.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
 		input.on(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
@@ -152,9 +150,6 @@ export class VirtualJoystickController extends Component {
 		input.on(Input.EventType.TOUCH_CANCEL, this.onTouchCancel, this);
 	}
 
-	/**
-	 * Unmount events
-	 */
 	public onDestroy(): void {
 		input.off(Input.EventType.TOUCH_START, this.onTouchStart, this);
 		input.off(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
