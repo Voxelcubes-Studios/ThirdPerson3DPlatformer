@@ -4,6 +4,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('VirtualJoystickController')
 export class VirtualJoystickController extends Component {
+	@property
+	hideOnLoad: boolean = false;
+
 	@property(Node)
 	joystickBase: Node | null = null;
 
@@ -134,7 +137,9 @@ export class VirtualJoystickController extends Component {
 	}
 
 	protected onLoad(): void {
-		this.hideJoystick();
+		if (this.hideOnLoad) {
+			this.hideJoystick();
+		}
 	}
 
 	/**

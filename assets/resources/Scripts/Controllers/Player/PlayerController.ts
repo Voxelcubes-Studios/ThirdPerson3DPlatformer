@@ -19,23 +19,18 @@ export class PlayerController extends Component {
 	private rigidBody: RigidBody | null = null;
 	private velocity: Vec3 = new Vec3();
 	private targetAngle: number = 0;
-	private isGrounded = false;
 	private forward = new Vec3();
-	public runSpeed: number = 1;
+	public runSpeed: number = 4;
 
 	private playIdleAnimation(): void {
 		if (this.skeletalAnim) {
-			if (this.isGrounded) {
-				this.machine.changeState(PlayerEnum.ANIM_STATE.IDLE);
-			}
+			this.machine.changeState(PlayerEnum.ANIM_STATE.IDLE);
 		}
 	}
 
 	private playRunAnimation(): void {
 		if (this.skeletalAnim) {
-			if (this.isGrounded) {
-				this.machine.changeState(PlayerEnum.ANIM_STATE.RUN);
-			}
+			this.machine.changeState(PlayerEnum.ANIM_STATE.RUN);
 		}
 	}
 
@@ -79,13 +74,13 @@ export class PlayerController extends Component {
 
 				this.velocity.set(this.forward).multiplyScalar(magnitude * this.runSpeed);
 
-				if (this.isGrounded) {
-					this.rigidBody.setLinearVelocity(this.velocity);
-					this.node.setRotationFromEuler(0, this.targetAngle, 0);
-					this.playRunAnimation();
-				}
+				this.rigidBody.setLinearVelocity(this.velocity);
+				this.node.setRotationFromEuler(0, this.targetAngle, 0);
+				this.playRunAnimation();
 			} else {
 				this.playIdleAnimation();
+				this.velocity.set(0, 0, 0);
+				this.rigidBody.setLinearVelocity(this.velocity);
 			}
 		}
 	}

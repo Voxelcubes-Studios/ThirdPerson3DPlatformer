@@ -12,7 +12,7 @@ export class PlayerRunState {
 
 	public enter(): void {
 		if (this.skeletalAnim) {
-			this.skeletalAnim.getState(PlayerEnum.ANIM_STATE.RUN).speed = 1.5;
+			this.skeletalAnim.getState(PlayerEnum.ANIM_STATE.RUN).speed = 1.2;
 			this.skeletalAnim.crossFade(PlayerEnum.ANIM_STATE.RUN);
 		}
 	}
