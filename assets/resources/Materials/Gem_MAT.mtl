@@ -1,0 +1,121 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "__editorExtras__": {},
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {
+      "USE_NORMAL_MAP": true,
+      "USE_ALBEDO_MAP": true,
+      "USE_PBR_MAP": true,
+      "USE_EMISSIVE_MAP": true
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  "_states": [
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    }
+  ],
+  "_props": [
+    {
+      "roughness": 1,
+      "metallic": 0.5,
+      "emissive": {
+        "__type__": "cc.Color",
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      },
+      "emissiveScale": {
+        "__type__": "cc.Vec3",
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "mainTexture": {
+        "__uuid__": "f964cc64-7958-4518-981a-2040b666db98@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "normalMap": {
+        "__uuid__": "281cbea3-922e-4bfe-8dad-488c19272a4c@3c318",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "pbrMap": {
+        "__uuid__": "bdaa07ba-476d-447f-98c3-2bc130ca308f@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "emissiveMap": {
+        "__uuid__": "c4ca79f8-ef26-4026-b1a7-45280e3fb543@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      }
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}
