@@ -1,5 +1,6 @@
-import { _decorator, EventTarget } from 'cc';
+import { _decorator, EventTarget, find } from 'cc';
 import { GameEventEnum } from '../Enums/GameEventEnum';
+import { GemGeneratorManager } from '../Managers/GemGeneratorManager';
 
 const { ccclass } = _decorator;
 
@@ -9,6 +10,7 @@ export class GameDataService {
 
 	public counter = 0;
 	public isGamepadActive = true;
+	public gemCount = 12; // Total number of gems to form the ring
 
 	/**
 	 * Use for hiding or showing the virtual joystick on screen.
@@ -39,8 +41,28 @@ export class GameDataService {
 		return this._instance;
 	}
 
+	public generateGems(): void {
+		const genNode = find('GemGenerator');
+
+		if (genNode) {
+			const script = genNode.getComponent('GemGeneratorManager') as GemGeneratorManager;
+			if (script) {
+				script.spawnAndAnimateRing();
+			}
+		}
+	}
+
+	protected createNewGems(): void {
+		if (this.counter % this.gemCount === 0) {
+			this.generateGems();
+		}
+	}
+
 	public updateCounter(callback?: () => void): void {
 		this.counter += 1;
+
+		// Generate new gems when all current gems are collected.
+		this.createNewGems();
 
 		this.updateCounterEvent.emit(GameEventEnum.UPDATE_COUNTER_EVENT, {
 			counter: this.counter,
