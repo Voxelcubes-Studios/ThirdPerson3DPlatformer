@@ -1,4 +1,15 @@
-import { _decorator, Component, find, math, RigidBody, SkeletalAnimation, Vec2, Vec3 } from 'cc';
+import {
+	_decorator,
+	Component,
+	find,
+	geometry,
+	math,
+	PhysicsSystem,
+	RigidBody,
+	SkeletalAnimation,
+	Vec2,
+	Vec3,
+} from 'cc';
 import { StateMachineCore } from '../../Core/StateMachineCore';
 import { PlayerEnum } from '../../Enums/PlayerEnum';
 import { PlayerRunState } from './PlayerRunState';
@@ -13,6 +24,9 @@ export class PlayerController extends Component {
 	@property({ type: SkeletalAnimation })
 	public skeletalAnim: SkeletalAnimation | null = null;
 
+	@property({ tooltip: 'Gravity pull force when player is not grounded' })
+	public gravityForce: number = -50.0;
+
 	private machine: StateMachineCore = new StateMachineCore();
 	private joystickController: VirtualJoystickController = null;
 	private gamepadController: GamepadController = null;
@@ -21,6 +35,10 @@ export class PlayerController extends Component {
 	private targetAngle: number = 0;
 	private forward = new Vec3();
 	public runSpeed: number = 5;
+	private isGrounded = false;
+	private raycastMask = 0xffffffff;
+	private raycastMaxDistance = 0.2; // 1; // 10000000;
+	private raycastQueryTrigger = true;
 
 	private playIdleAnimation(): void {
 		if (this.skeletalAnim) {
@@ -88,6 +106,84 @@ export class PlayerController extends Component {
 		}
 	}
 
+	private initRaycast(): void {
+		/**
+		 * This a tiny rectangular 3d box that is used to detect if the player is grounded or not.
+		 * The box is positioned at the bottom of the player and is used to detect if the player is standing
+		 * on the ground or not.
+		 */
+		const raycastNode = this.node.getChildByName(GameEnum.PLAYER_RAY_CAST);
+		if (!raycastNode) {
+			return;
+		}
+
+		const startPos = raycastNode.worldPosition.clone();
+		const worldRay = new geometry.Ray(startPos.x, startPos.y, startPos.z, 0, -1, 0);
+
+		const bResult = PhysicsSystem.instance.raycast(
+			worldRay,
+			this.raycastMask,
+			this.raycastMaxDistance,
+			this.raycastQueryTrigger
+		);
+
+		if (bResult) {
+			const results = PhysicsSystem.instance.raycastResults;
+
+			if (results.length > 0) {
+				/**
+				 * Extra collision checks.
+				 */
+				for (let i = 0; i < results.length; i++) {
+					const result = results[i];
+					const collider = result.collider;
+
+					if (result.collider) {
+						/**
+						 * Check if collided with DeadZone node which we want
+						 * to exclude from floor colliders.
+						 * Use this function to exclude unwanted colliders we
+						 * don't want to use in isGrounded detection logic.
+						 */
+						if (collider.node.name === GameEnum.DEAD_ZONE) {
+							console.log('Deadzone');
+							this.isGrounded = false;
+							return;
+						}
+					}
+				}
+
+				this.isGrounded = true;
+				console.log('Player is grounded:', this.isGrounded);
+			}
+		} else {
+			this.isGrounded = false;
+			console.log('Player is not grounded:', this.isGrounded);
+		}
+	}
+
+	/**
+	 * If the player is not grounded, apply
+	 * fall acceleration.
+	 * @param dt
+	 */
+	private increaseGravity(dt: number): void {
+		if (!this.isGrounded) {
+			let velocity = new Vec3();
+			this.rigidBody.getLinearVelocity(velocity);
+
+			velocity.y += this.gravityForce * dt; // Increase downward speed
+			this.rigidBody.setLinearVelocity(velocity);
+		}
+	}
+
+	public respawn(): void {
+		const spawnPosNode = find(GameEnum.SPAWN_POSITION_NODE);
+		if (spawnPosNode) {
+			this.node.setWorldPosition(spawnPosNode.getWorldPosition());
+		}
+	}
+
 	public start(): void {
 		this.rigidBody = this.node.getComponent(RigidBody);
 
@@ -103,6 +199,9 @@ export class PlayerController extends Component {
 	}
 
 	public update(deltaTime: number): void {
+		// Start detecting ground using raycast
+		this.initRaycast();
+
 		// Gamepad Controller
 		if (!this.joystickController.isTouching) {
 			if (this.gamepadController && this.gamepadController.isConnected) {
@@ -124,5 +223,8 @@ export class PlayerController extends Component {
 				this.joystickController.isTouching
 			);
 		}
+
+		// Accelerates players gravity.
+		this.increaseGravity(deltaTime);
 	}
 }
