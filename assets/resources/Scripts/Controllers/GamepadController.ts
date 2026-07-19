@@ -1,9 +1,12 @@
 import { _decorator, Component, EventGamepad, input, Input, Vec2 } from 'cc';
 import { GameDataService } from '../Services/GameDataService';
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass('GamepadController')
 export class GamepadController extends Component {
+	@property
+	public enableOnLoad: boolean = true;
+
 	private static LEFT_STICK = 'left';
 	private static RIGHT_STICK = 'right';
 
@@ -114,7 +117,7 @@ export class GamepadController extends Component {
 	public onLoad(): void {
 		input.on(Input.EventType.GAMEPAD_CHANGE, this.onGamepadChange, this);
 		input.on(Input.EventType.GAMEPAD_INPUT, this.onGamepadInput, this);
-		this.gameDataService.isGamepadActive = false;
+		this.gameDataService.isGamepadActive = this.enableOnLoad;
 	}
 
 	public onDestroy(): void {

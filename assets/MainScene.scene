@@ -168,6 +168,7 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "enableOnLoad": true,
     "_id": "53t9jSTnVCDYM3ek6pIafh"
   },
   {
@@ -14340,7 +14341,7 @@
     "_string": "0",
     "_horizontalAlign": 2,
     "_verticalAlign": 1,
-    "_actualFontSize": 79,
+    "_actualFontSize": 82,
     "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 60,
