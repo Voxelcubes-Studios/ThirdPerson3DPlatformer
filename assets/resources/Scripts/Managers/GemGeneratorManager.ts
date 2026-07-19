@@ -11,8 +11,14 @@ export class GemGeneratorManager extends Component {
 	@property({ tooltip: 'The final radius of the ring' })
 	public ringRadius: number = 5.0;
 
-	@property({ tooltip: 'How long the animation takes to expand (in seconds)' })
-	public duration: number = 0.5;
+	// @property({ tooltip: 'How long the animation takes to expand (in seconds)' })
+	public duration: number = 1;
+
+	// @property({ tooltip: 'Set to true for sequential popping, false for all together' })
+	public useRippleEffect: boolean = true;
+
+	// @property({ tooltip: 'Wait 1 second before doing anything' })
+	public initialDelay: number = 1.0;
 
 	@property({
 		type: Node,
@@ -28,9 +34,7 @@ export class GemGeneratorManager extends Component {
 			return;
 		}
 
-		this.scheduleOnce(() => {
-			this.spawnAndAnimateRing();
-		}, 5); // Delay of 5 seconds before spawning the ring
+		this.spawnAndAnimateRing();
 	}
 
 	public spawnAndAnimateRing(): void {
@@ -56,9 +60,16 @@ export class GemGeneratorManager extends Component {
 			gem.setParent(this.node.parent || this.node.scene);
 			gem.setWorldPosition(startWorldPos);
 
+			// Calculate delay: either a fixed time, or a staggered time based on index
+			const finalDelay = this.useRippleEffect
+				? this.initialDelay + i * 0.1
+				: this.initialDelay;
+
 			const tempPos = new Vec3();
 
+			// Tween the gem from the start position to the target position over the specified duration
 			tween(gem)
+				.delay(finalDelay)
 				.to(
 					this.duration,
 					{},
@@ -68,7 +79,7 @@ export class GemGeneratorManager extends Component {
 							Vec3.lerp(tempPos, startWorldPos, targetWorldPos, ratio);
 							target.setWorldPosition(tempPos);
 						},
-						easing: TweenEasingEnum.BackOut, // 'quadOut'
+						easing: TweenEasingEnum.QuadOut, // 'quadOut'
 					}
 				)
 				.start();

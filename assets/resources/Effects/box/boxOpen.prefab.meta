@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "6727616c-e34c-4c4c-b2dd-b686364db0dc",
+  "uuid": "85b27adf-0dd8-44ad-adb6-b765cd20eaed",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Gem"
+    "syncNodeName": "boxOpen"
   }
 }

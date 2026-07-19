@@ -2,18 +2,18 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "bdaa07ba-476d-447f-98c3-2bc130ca308f",
+  "uuid": "549a1c73-183a-4779-aba4-cec9630bf2ef",
   "files": [
     ".jpg",
     ".json"
   ],
   "subMetas": {
-    "6c48a": {
+    "3c318": {
       "importer": "texture",
-      "uuid": "bdaa07ba-476d-447f-98c3-2bc130ca308f@6c48a",
-      "displayName": "gem_PBR",
-      "id": "6c48a",
-      "name": "texture",
+      "uuid": "549a1c73-183a-4779-aba4-cec9630bf2ef@3c318",
+      "displayName": "gem_Blue_NORMAL",
+      "id": "3c318",
+      "name": "normalMap",
       "userData": {
         "wrapModeS": "repeat",
         "wrapModeT": "repeat",
@@ -22,8 +22,7 @@
         "mipfilter": "nearest",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "bdaa07ba-476d-447f-98c3-2bc130ca308f",
-        "visible": false
+        "imageUuidOrDatabaseUri": "549a1c73-183a-4779-aba4-cec9630bf2ef"
       },
       "ver": "1.0.22",
       "imported": true,
@@ -34,9 +33,9 @@
     }
   },
   "userData": {
-    "type": "texture",
+    "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": false,
-    "redirect": "bdaa07ba-476d-447f-98c3-2bc130ca308f@6c48a"
+    "redirect": "549a1c73-183a-4779-aba4-cec9630bf2ef@6c48a"
   }
 }

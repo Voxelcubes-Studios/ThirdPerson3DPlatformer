@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "Gem",
+    "_name": "RedGem",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Gem",
+    "_name": "RedGem",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -249,7 +249,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "GemCollider",
+    "_name": "RedGemCollider",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -404,7 +404,7 @@
     "nestedPrefabInstanceRoots": null
   },
   {
-    "__type__": "034cbhFzl5CKp9VLkdAld2w",
+    "__type__": "dcd14KPjRtLlqd5WC9aaez6",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -415,18 +415,21 @@
     "__prefab": {
       "__id__": 17
     },
-    "rotationSpeed": 50,
-    "bopHeight": 0.02,
-    "bopSpeed": 0.02,
-    "maxBopHeight": 0.4,
+    "rotationSpeed": 10,
+    "rotationVector": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 360,
+      "z": 0
+    },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "973RuZjGdH/KfGd5VT4ZOz"
+    "fileId": "54ZQdb1IlDAJKVMoHWN6rP"
   },
   {
-    "__type__": "40c707HzCdMYbHVwiMN5jHd",
+    "__type__": "07985CTfCRFJq7vcFLgQLvO",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -437,11 +440,15 @@
     "__prefab": {
       "__id__": 19
     },
+    "gemParticlePrefab": {
+      "__uuid__": "7b419930-6c37-44f4-aa0a-a79252a1a72d",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "6fug3Jvd1OOa39JXnFSsYI"
+    "fileId": "534KyoHGBLaJ4pMI7WRS9O"
   },
   {
     "__type__": "cc.PrefabInfo",

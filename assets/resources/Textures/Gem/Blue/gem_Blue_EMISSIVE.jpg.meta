@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "f964cc64-7958-4518-981a-2040b666db98",
+  "uuid": "f7787e3b-9809-4049-bd81-40860999c551",
   "files": [
     ".jpg",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f964cc64-7958-4518-981a-2040b666db98@6c48a",
-      "displayName": "gem_ALBEDO",
+      "uuid": "f7787e3b-9809-4049-bd81-40860999c551@6c48a",
+      "displayName": "gem_Blue_EMISSIVE",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "nearest",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f964cc64-7958-4518-981a-2040b666db98",
+        "imageUuidOrDatabaseUri": "f7787e3b-9809-4049-bd81-40860999c551",
         "visible": false
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": false,
-    "redirect": "f964cc64-7958-4518-981a-2040b666db98@6c48a"
+    "redirect": "f7787e3b-9809-4049-bd81-40860999c551@6c48a"
   }
 }

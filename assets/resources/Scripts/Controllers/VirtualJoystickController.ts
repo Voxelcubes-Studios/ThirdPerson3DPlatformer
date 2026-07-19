@@ -61,7 +61,6 @@ export class VirtualJoystickController extends Component {
 	public hideJoystick(): void {
 		this.disableJoystick();
 		this.joystickBase.active = false;
-		// this.joystickKnob.active = false;
 	}
 
 	public showJoystick(): void {
